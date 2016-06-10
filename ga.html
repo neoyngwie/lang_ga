@@ -1,0 +1,63 @@
+﻿<html>
+  <head>
+    <style type="text/css">
+    .topTitle{ background-color:#0000FF; color:#FFFFFF; font-size:24pt; }
+    .sourceBox{ background-color:#FFFFFF; color:#222222; font-size:14pt;
+		width: 100%; height: 100%; }
+    .messageBox{ background-color:#DDDDDD; color:#000000; font-size:14pt;
+		width: 100%; height: 150px; }
+    </style>
+    <title>가 언어</title>
+  </head>
+
+  <script type="text/javascript">
+  var scode="";
+  function onClickRun(){
+     scode=document.getElementById("sourcecode").value;
+
+     
+     addMessage("컴파일 중....\n");
+  }
+
+  function clearMessageBox(){
+    document.getElementById("messagebox").value="";
+  }
+
+  function addMessage(msg){
+    document.getElementById("messagebox").value+=msg;
+  }
+  </script>
+
+  <body>
+    <table cellspacing="0" cellpadding="0" width="100%" height="100%" border="0">
+    <tr>
+	<td colspan="2" width="100%" height="120" class="topTitle">
+        가 언어
+        </td>
+    </tr>
+    <tr>
+        <td width="100" height="100%" rowspan="2" valign="top">
+        <img src="new.png" width="80" height="80" border="0" alt="새 파일"><BR>
+<img src="load.png" width="80" height="80" border="0" alt="불러오기"><BR>
+<img src="save.png" width="80" height="80" border="0" alt="저장하기"><BR>
+
+<a href="javascript:onClickRun();">
+<img src="run.png" width="80" height="80" border="0" alt="실행하기">
+</a>
+<BR>
+<img src="zoomin.jpg" width="80" height="80" border="0" alt="확대"><BR>
+<img src="zoomout.png" width="80" height="80" border="0" alt="축소"><BR>
+<img src="help.jpg" width="80" height="80" border="0" alt="도움말">
+   	</td>
+	<td width="100%">
+	 <textarea id="sourcecode" class="sourceBox"></textarea>
+	</td>	
+    </tr>
+    <tr>
+	<td width="100%" height=150>
+	<textarea class="messageBox" id="messagebox"></textarea>
+	</td>
+    </tr>
+    </table>
+  </body>
+</html>

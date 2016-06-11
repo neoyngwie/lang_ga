@@ -7,17 +7,27 @@
     .messageBox{ background-color:black; color:white; font-size:14pt;
 		width: 100%; height: 150px; }
     </style>
-    <title>°¡ ¾ğ¾î</title>
+    <title>ê°€ ì–¸ì–´</title>
   </head>
 
   <script type="text/javascript">
   var scode="";
+  var a
   function onClickRun(){
      scode=document.getElementById("sourcecode").value;
 
      
-     addMessage("ÄÄÆÄÀÏ Áß....\n");
-  }
+     addMessage("ì»´íŒŒì¼ ì¤‘....\n");
+     for(var i = 0;scode[i]==/0;i++){
+     		if(scode[i]='('||')'||'{'||'}'||'['||']'||'<'||'>'||','||'.'||'\''||'\"'||'\/'){
+     			addMessage("\n");
+     		}
+     		addMessage(scode[i]);
+     	}
+     	
+     }
+     	
+     }
 
   function clearMessageBox(){
     document.getElementById("messagebox").value="";
@@ -32,22 +42,22 @@
     <table cellspacing="0" cellpadding="0" width="100%" height="100%" border="0">
     <tr>
 	<td colspan="2" width="100%" height="70" class="topTitle">
-        °¡ ¾ğ¾î
+        ê°€ ì–¸ì–´
         </td>
     </tr>
     <tr>
         <td width="180" height="100%" rowspan="2" valign="top">
-        <img src="new.png" width="80" height="80" border="0" alt="»õ ÆÄÀÏ"><BR>
-<img src="load.png" width="80" height="80" border="0" alt="ºÒ·¯¿À±â"><BR>
-<img src="save.png" width="80" height="80" border="0" alt="ÀúÀåÇÏ±â"><BR>
+        	<img src="new.png" width="80" height="80" border="0" alt="ìƒˆ íŒŒì¼"><BR>
+		<img src="load.png" width="80" height="80" border="0" alt="ë¶ˆëŸ¬ì˜¤ê¸°"><BR>
+		<img src="save.png" width="80" height="80" border="0" alt="ì €ì¥í•˜ê¸°"><BR>
 
-<a href="javascript:onClickRun();">
-<img src="run.png" width="80" height="80" border="0" alt="½ÇÇàÇÏ±â">
-</a>
-<BR>
-<img src="zoomin.jpg" width="80" height="80" border="0" alt="È®´ë"><BR>
-<img src="zoomout.png" width="80" height="80" border="0" alt="Ãà¼Ò"><BR>
-<img src="help.jpg" width="80" height="80" border="0" alt="µµ¿ò¸»">
+	<a href="javascript:onClickRun();">
+		<img src="run.png" width="80" height="80" border="0" alt="ì‹¤í–‰í•˜ê¸°">
+		</a>
+	<BR>
+		<img src="zoomin.jpg" width="80" height="80" border="0" alt="í™•ëŒ€"><BR>
+		<img src="zoomout.png" width="80" height="80" border="0" alt="ì¶•ì†Œ"><BR>
+		<img src="help.jpg" width="80" height="80" border="0" alt="ë„ì›€ë§">
    	</td>
 	<td width="100%">
 	 <textarea id="sourcecode" class="sourceBox"></textarea>

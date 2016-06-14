@@ -7,43 +7,32 @@
     .messageBox{ background-color:black; color:white; font-size:14pt;
 		width: 100%; height: 150px; }
     </style>
-    <title>∞° ææÓ</title>
+    <title>Í∞Ä Ïñ∏Ïñ¥</title>
   </head>
 
   <script type="text/javascript">
   var scode="";
   var tokens;
+  var i=0;
+  var buffer="";
   function scanner(){
 	tokens=new Array();
-	var state=0; //0¿Ã∏È ø¨ªÍ¿⁄ ∞°∏Æ±‚ ∏µÂ
-                     //1¿Ã∏È ¥‹æÓ ∏∏µÈ±‚ ∏µÂ
-                     //2¿Ã∏È º˝¿⁄ ∏∏µÈ±‚ ∏µÂ
-	var buffer="";
-	for(var i=0;i<scode.length;i++){
+	var state=0; //0Ïù¥Î©¥ Ïó∞ÏÇ∞Ïûê Í∞ÄÎ¶¨Í∏∞ Î™®Îìú
+                     //1Ïù¥Î©¥ Îã®Ïñ¥ ÎßåÎì§Í∏∞ Î™®Îìú
+                     //2Ïù¥Î©¥ Ïà´Ïûê ÎßåÎì§Í∏∞ Î™®Îìú
+	for(;i<scode.length;i++){
 		var c=scode.charAt(i);
 		if(state==0){		
             if(c==' ' || c=='\n' || c=='\r' || c=='\t') continue;
             var nc=(i<scode.length-1)?scode.charAt(i+1):'@';
-
+	    if(c=='-' || c=='+' || c=='*' || c=='/'||c=='='||c=='<'||c=='>'){
+	    	dubba(c,nc);
+	    }
             switch(c){
                 case '{': tokens.push(c); break;
                 case '}': tokens.push(c); break;
                 case '(': tokens.push(c); break;
                 case ')': tokens.push(c); break;
-                case '+': if(nc=='+'){
-                        tokens.push('++');
-                        i++;
-                    }else{
-                        tokens.push(c);
-                    }
-                    break;
-                case '-': if(nc=='-'){
-                        tokens.push('--');
-                        i++;
-                    }else{
-                        tokens.push(c);
-                    }
-                    break;
                 default:
                     if(isNaN(c)){
                         state=1; buffer=c;
@@ -52,6 +41,7 @@
                     }
                     break;
                 }
+		}
 		}else if(state==1){
 		    if(c==' ' || c=='\n' || c=='\r' || c=='\t' 
                 || c=='+' || c=='-' ||c=='{' || c=='}' || c=='(' || c==')' ){
@@ -77,10 +67,22 @@
 	}
   }
 
+  function dubba(cc,nnc){
+  	if(nc==cc){
+                        tokens.push(cc+cc);
+                        i++;
+                    }else  if(nnc=='='){
+                        tokens.push(cc+'=');
+                        i++;
+                    }else{
+                        tokens.push(cc);
+                    }
+                    break;
+  }
   function onClickRun(){
      scode=document.getElementById("sourcecode").value;
 
-     addMessage("ƒƒ∆ƒ¿œ ¡ﬂ....\n");
+     addMessage("Ïª¥ÌååÏùº Ï§ë....\n");
      
      scanner();	
      
@@ -103,41 +105,25 @@
   </script>
 
   <body>
-    <table cellspacing="0" cellpadding="0" width="100%" height="100%" 
-
-border="0">
+    <table cellspacing="0" cellpadding="0" width="100%" height="100%" border="0">
     <tr>
 	<td colspan="2" width="100%" height="70" class="topTitle">
-        ∞° ææÓ
+        Í∞Ä Ïñ∏Ïñ¥
         </td>
     </tr>
     <tr>
         <td width="180" height="100%" rowspan="2" valign="top">
-        	<img src="new.png" width="80" height="80" border="0" alt="
-
-ªı ∆ƒ¿œ"><BR>
-		<img src="load.png" width="80" height="80" border="0" alt="
-
-∫“∑Øø¿±‚"><BR>
-		<img src="save.png" width="80" height="80" border="0" alt="
-
-¿˙¿Â«œ±‚"><BR>
+        	<img src="new.png" width="80" height="80" border="0" alt="ÏÉà ÌååÏùº"><BR>
+		<img src="load.png" width="80" height="80" border="0" alt="Î∂àÎü¨Ïò§Í∏∞"><BR>
+		<img src="save.png" width="80" height="80" border="0" alt="Ï†ÄÏû•ÌïòÍ∏∞"><BR>
 
 	<a href="javascript:onClickRun();">
-		<img src="run.png" width="80" height="80" border="0" alt="
-
-Ω««‡«œ±‚">
+		<img src="run.png" width="80" height="80" border="0" alt="Ïã§ÌñâÌïòÍ∏∞">
 		</a>
 	<BR>
-		<img src="zoomin.jpg" width="80" height="80" border="0" 
-
-alt="»Æ¥Î"><BR>
-		<img src="zoomout.png" width="80" height="80" border="0" 
-
-alt="√‡º“"><BR>
-		<img src="help.jpg" width="80" height="80" border="0" alt="
-
-µµøÚ∏ª">
+		<img src="zoomin.jpg" width="80" height="80" border="0" alt="ÌôïÎåÄ"><BR>
+		<img src="zoomout.png" width="80" height="80" border="0" alt="Ï∂ïÏÜå"><BR>
+		<img src="help.jpg" width="80" height="80" border="0" alt="ÎèÑÏõÄÎßê">
    	</td>
 	<td width="100%">
 	 <textarea id="sourcecode" class="sourceBox"></textarea>
@@ -151,4 +137,3 @@ alt="√‡º“"><BR>
     </table>
   </body>
 </html>
-

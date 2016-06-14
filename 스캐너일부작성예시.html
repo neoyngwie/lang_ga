@@ -29,19 +29,20 @@
 	    if(c=='-' || c=='+' || c=='*' || c=='/'||c=='='||c=='<'||c=='>'){
 	    	dubba();
 	    }
-            switch(c){
-                case '{': tokens.push(c); break;
-                case '}': tokens.push(c); break;
-                case '(': tokens.push(c); break;
-                case ')': tokens.push(c); break;
-                default:
-                    if(isNaN(c)){
-                        state=1; buffer=c;
-                    }else{
-                        state=2; buffer=c;
-                    }
-                    break;
-                }
+	    else{
+            	switch(c){
+                	case '{': tokens.push(c); break;
+                	case '}': tokens.push(c); break;
+                	case '(': tokens.push(c); break;
+                        case ')': tokens.push(c); break;
+                	default:
+                	    if(isNaN(c)){
+                	        state=1; buffer=c;
+                    	}else{
+                        	state=2; buffer=c;
+                    	}
+                	 break;
+        		 }
 		}
 		}else if(state==1){
 		    if(c==' ' || c=='\n' || c=='\r' || c=='\t' 
@@ -90,9 +91,22 @@
   }
   
   function dump_token(){
+    var su;
     for(var i=0;i<tokens.length;i++){
         addMessage(tokens[i]+'\n');
+        if(!isNan(tokens[i])){
+        	su+=tokens[i];	
+        }else if(c=='-' || c=='+' || c=='*' || c=='/'||c=='='){
+        	su+=tokens[i];	
+        	slect();
+        }else{
+        	continue;
+        	su=" ";
+        }
     }
+  }
+  function slect(){
+  	
   }
 
   function clearMessageBox(){

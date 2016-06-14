@@ -15,18 +15,19 @@
   var tokens;
   var i=0;
   var buffer="";
+  var c;
   function scanner(){
 	tokens=new Array();
 	var state=0; //0이면 연산자 가리기 모드
                      //1이면 단어 만들기 모드
                      //2이면 숫자 만들기 모드
 	for(;i<scode.length;i++){
-		var c=scode.charAt(i);
+		c=scode.charAt(i);
 		if(state==0){		
             if(c==' ' || c=='\n' || c=='\r' || c=='\t') continue;
             var nc=(i<scode.length-1)?scode.charAt(i+1):'@';
 	    if(c=='-' || c=='+' || c=='*' || c=='/'||c=='='||c=='<'||c=='>'){
-	    	dubba(c,nc);
+	    	dubba();
 	    }
             switch(c){
                 case '{': tokens.push(c); break;
@@ -66,16 +67,15 @@
 						
 	}
   }
-
-  function dubba(cc,nnc){
-  	if(nc==cc){
-                        tokens.push(cc+cc);
+  function dubba(){
+  	if(nc==c){
+                        tokens.push(c+c);
                         i++;
-                    }else  if(nnc=='='){
-                        tokens.push(cc+'=');
+                    }else  if(nc=='='){
+                        tokens.push(c+'=');
                         i++;
                     }else{
-                        tokens.push(cc);
+                        tokens.push(c);
                     }
                     break;
   }

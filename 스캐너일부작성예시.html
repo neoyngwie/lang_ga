@@ -14,7 +14,7 @@
   var scode="";
   var tokens;
   var i=0;
-  var buffer="";
+  var buffer=" ";
   var c;
   function scanner(){
 	tokens=new Array();
@@ -45,25 +45,23 @@
         		 }
 		}
 		}else if(state==1){
-		    if(c==' ' || c=='\n' || c=='\r' || c=='\t' 
-                || c=='+' || c=='-' ||c=='{' || c=='}' || c=='(' || c==')' ){
+		    if(c==' ' || c=='\n' || c=='\r' || c=='\t'|| c=='+' || c=='-' ||c=='{' || c=='}' || c=='(' || c==')' ){
                     i--;
                     state=0;
                     tokens.push(buffer);
                     buffer="";
-                }else{
-                    buffer+=c;
-                }
+                    }else{
+                    	buffer+=c;
+                    }
 		}else if(state==2){
-            if(c==' ' || c=='\n' || c=='\r' || c=='\t' 
-                || c=='+' || c=='-' ||c=='{' || c=='}' || c=='(' || c==')' || isNaN(c) ){
-                    i--;
-                    state=0;
-                    tokens.push(parseFloat(buffer));
-                    buffer="";
-                }else{
-                    buffer+=c;
-                }
+            		    if(c==' ' || c=='\n' || c=='\r' || c=='\t'  || c=='+' || c=='-' ||c=='{' || c=='}' || c=='(' || c==')' || isNaN(c) ){
+                	    i--;
+                	    state=0;
+                	    tokens.push(parseFloat(buffer));
+                	    buffer="";
+                	}else{
+                    		buffer+=c;
+                	}
 		}
 						
 	}

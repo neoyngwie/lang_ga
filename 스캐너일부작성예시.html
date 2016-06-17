@@ -94,7 +94,7 @@
     var su;
     for(var i=0;i<tokens.length;i++){
         addMessage(tokens[i]+'\n');
-        if(!isNan(tokens[i])){
+        if(isNan(tokens[i])==false){
         	su+=tokens[i];	
         }else if(c=='-' || c=='+' || c=='*' || c=='/'||c=='='){
         	su+=tokens[i];	

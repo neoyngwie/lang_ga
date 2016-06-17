@@ -15,9 +15,9 @@
   var tokens;
   var i=0;
   var buffer=" ";
-  var c;
   function scanner(){
 	tokens=new Array();
+  	var c;
 	var state=0; //0이면 연산자 가리기 모드
                      //1이면 단어 만들기 모드
                      //2이면 숫자 만들기 모드
@@ -27,7 +27,9 @@
             if(c==' ' || c=='\n' || c=='\r' || c=='\t') continue;
             var nc=(i<scode.length-1)?scode.charAt(i+1):'@';
 	    if(c=='-' || c=='+' || c=='*' || c=='/'||c=='='||c=='<'||c=='>'){
-	    	dubba();
+	    	i += dubba(nc,c);
+	    	i++;
+	    	continue;
 	    }
 	    else{
             	switch(c){
@@ -66,17 +68,17 @@
 						
 	}
   }
-  function dubba(){
-  	if(nc==c){
-                        tokens.push(c+c);
-                        i++;
-                    }else  if(nc=='='){
-                        tokens.push(c+'=');
-                        i++;
-                    }else{
-                        tokens.push(c);
-                    }
-                    break;
+  function dubba(var nc,var c){
+	if(nc==c){
+		tokens.push(c+c);
+		return 1;
+	}else  if(nc=='='){
+		tokens.push(c+'=');
+		return 1;
+	}else{
+		tokens.push(c);
+		return 0;
+	}
   }
   function onClickRun(){
      scode=document.getElementById("sourcecode").value;

@@ -37,6 +37,8 @@
                 	case '}': tokens.push(c); break;
                 	case '(': tokens.push(c); break;
                         case ')': tokens.push(c); break;
+                        case '.': tokens.push(c); break;
+                        case ',': tokens.push(c); break;
                 	default:
                 	    if(isNaN(c)){
                 	        state=1; buffer=c;
@@ -68,7 +70,7 @@
 						
 	}
   }
-  function dubba(var nc,var c){
+  function dubba(nc,c){
 	if(nc==c){
 		tokens.push(c+c);
 		return 1;
@@ -93,29 +95,16 @@
   function dump_token(){
     var su;
     for(var i=0;i<tokens.length;i++){
-        addMessage(tokens[i]+'\n');
-        if(isNan(tokens[i])==false){
-        	su+=tokens[i];	
-        }else if(c=='-' || c=='+' || c=='*' || c=='/'||c=='='){
-        	su+=tokens[i];	
-        	slect();
-        }else{
-        	continue;
-        	su=" ";
-        }
+        addMessage(tokens[i]);
     }
   }
-  function slect(){
-  	
-  }
-
   function clearMessageBox(){
     document.getElementById("messagebox").value="";
   }
 
   function addMessage(msg){
-    document.getElementById("messagebox").value=msg;
-    document.getElementById("messagebox").value="\n";
+    document.getElementById("messagebox").value+=msg;
+    document.getElementById("messagebox").value+="\n";
   }
   </script>
 

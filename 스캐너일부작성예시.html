@@ -16,6 +16,7 @@
   var i=0;
   var buffer=" ";
   var c;
+  var nc;
   function scanner(){
 	tokens=new Array();
 	var state=0; //0이면 연산자 가리기 모드
@@ -25,7 +26,7 @@
 		c=scode.charAt(i);
 		if(state==0){		
             if(c==' ' || c=='\n' || c=='\r' || c=='\t') continue;
-            var nc=(i<scode.length-1)?scode.charAt(i+1):'@';
+            nc=(i<scode.length-1)?scode.charAt(i+1):'@';
 	    if(c=='-' || c=='+' || c=='*' || c=='/'||c=='='||c=='<'||c=='>'){
 	    	dubba();
 	    }
@@ -98,13 +99,10 @@
         	su+=tokens[i];	
         	slect();
         }else{
-        	continue;
         	su=" ";
+        	continue;
         }
     }
-  }
-  function slect(){
-  	
   }
 
   function clearMessageBox(){

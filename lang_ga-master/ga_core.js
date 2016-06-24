@@ -121,7 +121,14 @@ function onClickRun(){
      
      math_parser();
 }
-  
+function math_parser(){
+	var math;
+	for(var i = 0;i<tokens.length;i++){
+		if(isNaN(tokens[i])==false||tokens[i]=='.'){
+			math[math.length]=tokens[i];
+		}
+	}
+} 
 function dump_token(){
 	 document.getElementById("messagebox").value=" "
     var su;

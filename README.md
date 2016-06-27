@@ -39,6 +39,7 @@ function scanner(){
       i++;
       state=5;
       continue;
+      }
 			if(c=='-' || c=='+' || c=='*' || c=='='){
 				if(nc==c){
 					tokens.push(c+c); // -- , ++ , ** , ==

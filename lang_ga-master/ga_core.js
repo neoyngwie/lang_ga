@@ -125,7 +125,10 @@ function math_parser(){
 	var math;
 	for(var i = 0;i<tokens.length;i++){
 		if(isNaN(tokens[i])==false||tokens[i]=='.'){
-			math[math.length]=tokens[i];
+			math[math.length][math[math.length].length]=tokens[i];
+		}
+		else if(isNaN(tokens[i])==true||tokens[i]=='+'||tokens[i]=='/'||tokens[i]=='*'||tokens[i]=='-'){
+			math[math.length][math[math.length].length]=tokens[i];
 		}
 	}
 } 

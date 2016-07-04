@@ -16,7 +16,7 @@ function scanner(){
 	tokens=new Array();
   	var c;
 	var state=0; //0이면 연산자 가리기 모드
-				 //1이면 단어 만들기 모드
+	    //1이면 단어 만들기 모드
             //2이면 숫자 만들기 모드
             //3이면 주석
             //4이면 문자열

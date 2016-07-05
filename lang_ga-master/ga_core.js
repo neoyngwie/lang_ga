@@ -119,19 +119,72 @@ function onClickRun(){
      
      dump_token();
      
-     math_parser();
+     sick=mathparser();
+     
+     addMessage(sick);
 }
-function math_parser(){
-	var math;
-	for(var i = 0;i<tokens.length;i++){
-		if(isNaN(tokens[i])==false||tokens[i]=='.'){
-			math[math.length][math[math.length].length]=tokens[i];
+function error_code1(){
+	addMessage("컴파일오류 코드 1 ; 식이 잘못 되었습니다.\n다시 한번 확인을 부탁드립니다.\n 이 오류메세지 끝 ");
+}
+function error_code2(){
+	addMessage("컴파일 에러 코드2 ; 괄호가 닫히지 않았습니다.\n다시 한번 확인을 부탁드립니다.\n 이 오류메세지 끝")	
+}
+var cur_tok;
+function mathparser(){
+	expr();
+}
+function expr(){
+	r;
+	r=term;
+	for(i=0;tokens[i]=='+'||tokens[i]=='-'||i<tokens.length;i++){
+		if(tokens[i]=='+'){
+			r+=term();
 		}
-		else if(isNaN(tokens[i])==true||tokens[i]=='+'||tokens[i]=='/'||tokens[i]=='*'||tokens[i]=='-'){
-			math[math.length][math[math.length].length]=tokens[i];
+		else if(tokens[i]=='-'){
+			r-=term();
+		}
+		else{
+			error_code1();
 		}
 	}
 } 
+function term(){
+	r;
+	r=factor;
+	for(i=0;tokens[i]=='*'||tokens[i]=='/'||i<tokens.length;i++){
+		if(tokens[i]=='*'){
+			r*=factor();
+		}
+		else if(tokens[i]=='/'){
+			r/=factor();
+		}
+		else{
+			error_code1();
+		}
+	}
+}
+function factor(){
+	r;
+	for(i=0;i<tokens.length;i++){
+		if(tokens[i]=='('){
+			r=expr();
+		}
+		else if(tokens[i]==')'){
+			r=expr();
+			if(i+2!=tokens.length){
+				if(tokens[++i]==')'){
+					i++;
+				} 
+				else {
+					error_code2();
+				}
+			}
+		}
+		else{
+			error_math();
+		}
+	}
+}
 function dump_token(){
 	 document.getElementById("messagebox").value=" "
     var su;

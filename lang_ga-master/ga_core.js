@@ -163,6 +163,9 @@ function term(){
 		else if(tokens[curTokNo++]=='/'){
 			r/=factor();
 		}
+		else{
+			error_code1();
+		}
 	}
 }
 function factor(){
@@ -171,6 +174,7 @@ function factor(){
 		if(tokens[curTokNo++]=='('){
 			r=expr();
 			if(tokens[curTokNo++]==')'){
+				continue;
 			}
 			else{
 				error_code2();

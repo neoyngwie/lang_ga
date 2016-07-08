@@ -139,28 +139,30 @@ function mathparser(){
 var curTokNo=0;
 var tok;
 function curtok_No{
-	curTokNo++;
+	return ++curTokNo;
 }
 function Tok(){
 	if(curTokNo<tokens.length){
-	 	tok=tokens[curTokNo];
+	 	tok=tokens[curtok_No];
 	}
 }
 function expr(){
 	var r;
 	r=term();
 	while(curTokNo>tokens.length){
-		if(tokens[curTokNo++]=='+'){
-			curtok_No();
+		if(tokens[tok]=='+'){
+			Tok();
 			r+=term();
 		}
-		else if(tokens[curTokNo++]=='-'){
+		else if(tokens[tok]=='-'){
+			Tok();
 			r-=term();
 		}
 		else{
 			error_code1();
 		}
 	}
+	return 0;
 } 
 function term(){
 	var r;
@@ -186,7 +188,7 @@ function factor(){
 				continue;
 			}
 			else{
-				error_code2();
+				
 			}
 		}
 	}

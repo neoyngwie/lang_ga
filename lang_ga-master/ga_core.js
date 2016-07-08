@@ -137,12 +137,21 @@ function mathparser(){
 }
 
 var curTokNo=0;
-
+var tok;
+function curtok_No{
+	curTokNo++;
+}
+function Tok(){
+	if(curTokNo<tokens.length){
+	 	tok=tokens[curTokNo];
+	}
+}
 function expr(){
 	var r;
 	r=term();
 	while(curTokNo>tokens.length){
 		if(tokens[curTokNo++]=='+'){
+			curtok_No();
 			r+=term();
 		}
 		else if(tokens[curTokNo++]=='-'){

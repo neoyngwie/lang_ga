@@ -1,5 +1,6 @@
 <html>
   <head>
+	<meta http-equiv="Content-Type" Content="text/html; charset=utf-8" />
     <style type="text/css">
     .topTitle{ background-color:black; color:yellow; font-size:24pt; }
     .sourceBox{ background-color:black; color:yellow; font-size:14pt;
@@ -10,33 +11,7 @@
     <title>가 언어</title>
   </head>
 
-  <script type="text/javascript">
-  var scode="";
-  var a
-  function onClickRun(){
-     scode=document.getElementById("sourcecode").value;
-
-     
-     addMessage("컴파일 중....\n");
-     for(var i = 0;scode[i]==/0;i++){
-     		if(scode[i]='('||')'||'{'||'}'||'['||']'||'<'||'>'||','||'.'||'\''||'\"'||'\/'){
-     			addMessage("\n");
-     		}
-     		addMessage(scode[i]);
-     	}
-     	
-     }
-     	
-     }
-
-  function clearMessageBox(){
-    document.getElementById("messagebox").value="";
-  }
-
-  function addMessage(msg){
-    document.getElementById("messagebox").value+=msg;
-  }
-  </script>
+  <script type="text/javascript" src="./math.js"></script>
 
   <body>
     <table cellspacing="0" cellpadding="0" width="100%" height="100%" border="0">

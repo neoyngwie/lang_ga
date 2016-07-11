@@ -137,26 +137,24 @@ function mathparser(){
 }
 
 var curTokNo=0;
-var tok;
-function curtok_No()
+function consumeToken()
 {
-	return ++curTokNo;
+	curTokNo++;
 }
-function Tok(){
-	if(curTokNo<tokens.length){
-	 	tok=tokens[curtok_No];
-	}
+function tok(){
+	if(curTokNo>=tokens.length) return "";
+	return tokens[curtokNo];
 }
-function expr(){
+function expr(){//expr -> term(('+'|'-')term)*
 	var r;
 	r=term();
-	while(curTokNo>tokens.length){
+	while(tok=='+'||tok=='-'){
 		if(tok=='+'){
-			Tok();
+			consumeToken();
 			r+=term();
 		}
 		else if(tok=='-'){
-			Tok();
+			consumeToken();
 			r-=term();
 		}
 		else{
@@ -168,11 +166,13 @@ function expr(){
 function term(){
 	var r;
 	r=factor();
-	while(curTokNo>tokens.length){
+	while(tok=='*'||tok=='/'){
 		if(tok=='*'){
+			consumeToken();
 			r*=factor();
 		}
 		else if(tok=='/'){
+			consumeToken();
 			r/=factor();
 		}
 		else{
@@ -183,22 +183,25 @@ function term(){
 }
 function factor(){
 	var r;
-	while(curTokNo>tokens.length){
-		if(tok==" "){
-			r=document.getElementById("sourcecode").value;
-			Tok();
-		}
-		else if(tok=='('){
-			Tok();
+	if(isNaN(tok())){
+		if(tok()=='('){
+			consumeToken();
 			r=expr();
-			if(tok==')'){
-				Tok();
-				continue;
+			if(tok()==')'){
+				consumeToken();
+				return r;
 			}
 			else{
 				
 			}
+		}else
+		{
+		
 		}
+	}else{
+		r=tok();
+		consumeToken();
+		return r;
 	}
 	return r;
 }

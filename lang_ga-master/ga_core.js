@@ -137,27 +137,28 @@ function mathparser(){
 }
 
 var curTokNo=0;
+
 function consumeToken()
 {
-	curTokNo++;
+	++curTokNo;
 }
+
 function tok(){
 	if(curTokNo>=tokens.length) return "";
-	return tokens[curtokNo];
+	return tokens[curTokNo];
 }
-function expr(){//expr -> term(('+'|'-')term)*
+
+function expr(){ // expr -> term (('+' | '-') term)*
 	var r;
 	r=term();
-	while(tok=='+'||tok=='-'){
-		if(tok=='+'){
+	while(tok()=='+' || tok()=='-'){
+		if(tok()=='+'){
 			consumeToken();
 			r+=term();
-		}
-		else if(tok=='-'){
+		}else if(tok()=='-'){
 			consumeToken();
 			r-=term();
-		}
-		else{
+		}else{
 			error_code1();
 		}
 	}
@@ -166,13 +167,11 @@ function expr(){//expr -> term(('+'|'-')term)*
 function term(){
 	var r;
 	r=factor();
-	while(tok=='*'||tok=='/'){
+	while(curTokNo>tokens.length){
 		if(tok=='*'){
-			consumeToken();
 			r*=factor();
 		}
 		else if(tok=='/'){
-			consumeToken();
 			r/=factor();
 		}
 		else{
@@ -181,29 +180,27 @@ function term(){
 	}
 	return r;
 }
-function factor(){
+function factor(){ // factor -> NUMBER | '(' expr ')'
 	var r;
-	if(isNaN(tok())){
+	
+	if(isNaN(tok()){ // '(' expr ')'
 		if(tok()=='('){
 			consumeToken();
 			r=expr();
 			if(tok()==')'){
 				consumeToken();
 				return r;
+			}else{
+				//닫는괄호가 없다는 오류 출력
 			}
-			else{
-				
-			}
-		}else
-		{
-		
+		}else{
+			// 괄호가 아닌 것이 나왔다는 에러를 출력
 		}
-	}else{
+	}else{ // NUMBER
 		r=tok();
 		consumeToken();
 		return r;
 	}
-	return r;
 }
 function dump_token(){
     var su;
@@ -215,3 +212,4 @@ function addMessage(msg){
     document.getElementById("messagebox").value+=msg;
     document.getElementById("messagebox").value=document.getElementById("messagebox").value+"\n";
 }
+

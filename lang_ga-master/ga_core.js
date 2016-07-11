@@ -162,7 +162,7 @@ function expr(){
 			error_code1();
 		}
 	}
-	return 0;
+	return r;
 } 
 function term(){
 	var r;
@@ -178,6 +178,7 @@ function term(){
 			error_code1();
 		}
 	}
+	return r;
 }
 function factor(){
 	var r;
@@ -192,6 +193,7 @@ function factor(){
 			}
 		}
 	}
+	return r;
 }
 function dump_token(){
 	 document.getElementById("messagebox").value=" "

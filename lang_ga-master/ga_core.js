@@ -116,7 +116,7 @@ function onClickRun(){
      addMessage("컴파일 중....\n");
      
      scanner();	
-     
+	
      dump_token();
      
      sick=mathparser();
@@ -133,12 +133,13 @@ function error_code2(){
 }
 
 function mathparser(){
-	expr();
+	return expr();
 }
 
 var curTokNo=0;
 var tok;
-function curtok_No{
+function curtok_No()
+{
 	return ++curTokNo;
 }
 function Tok(){
@@ -150,11 +151,11 @@ function expr(){
 	var r;
 	r=term();
 	while(curTokNo>tokens.length){
-		if(tokens[tok]=='+'){
+		if(tok=='+'){
 			Tok();
 			r+=term();
 		}
-		else if(tokens[tok]=='-'){
+		else if(tok=='-'){
 			Tok();
 			r-=term();
 		}
@@ -168,10 +169,10 @@ function term(){
 	var r;
 	r=factor();
 	while(curTokNo>tokens.length){
-		if(tokens[curTokNo++]=='*'){
+		if(tok=='*'){
 			r*=factor();
 		}
-		else if(tokens[curTokNo++]=='/'){
+		else if(tok=='/'){
 			r/=factor();
 		}
 		else{
@@ -182,10 +183,16 @@ function term(){
 }
 function factor(){
 	var r;
-	while(curTok>tokens.length){
-		if(tokens[curTokNo++]=='('){
+	while(curTokNo>tokens.length){
+		if(tok==" "){
+			r=document.getElementById("sourcecode").value;
+			Tok();
+		}
+		else if(tok=='('){
+			Tok();
 			r=expr();
-			if(tokens[curTokNo++]==')'){
+			if(tok==')'){
+				Tok();
 				continue;
 			}
 			else{
@@ -196,18 +203,12 @@ function factor(){
 	return r;
 }
 function dump_token(){
-	 document.getElementById("messagebox").value=" "
     var su;
-    for(var i=0;i<tokens.length;i++){
+    for(var i=0;i<tokens.length+1;i++){
         addMessage(tokens[i]);
     }
 }
-
-function clearMessageBox(){
-    document.getElementById("messagebox").value="";
-}
-
 function addMessage(msg){
     document.getElementById("messagebox").value+=msg;
-    document.getElementById("messagebox").value+="\n";
+    document.getElementById("messagebox").value=document.getElementById("messagebox").value+"\n";
 }

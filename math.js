@@ -11,7 +11,7 @@ function isOp(c){
 
 function scanner(){
 	var i=0;
-	var j[21000000000000];
+	var j[210000000];
 	var k=0;
 	tokens=new Array();
   	var c;

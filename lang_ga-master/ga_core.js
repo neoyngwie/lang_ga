@@ -167,11 +167,13 @@ function expr(){ // expr -> term (('+' | '-') term)*
 function term(){
 	var r;
 	r=factor();
-	while(curTokNo>tokens.length){
+	while(tok()=='*' || tok()=='/'){
 		if(tok=='*'){
+			consumeToken();
 			r*=factor();
 		}
 		else if(tok=='/'){
+			consumeToken();
 			r/=factor();
 		}
 		else{

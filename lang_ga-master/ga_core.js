@@ -1,4 +1,4 @@
-var scode="";
+﻿var scode="";
 var tokens;
 var buffer="";
 
@@ -19,13 +19,13 @@ function scanner(){
 	for(; i<scode.length; i++){
 		c=scode.charAt(i);
 		if(state==0){		
-        if(c==' ' || c=='\n' || c=='\r' || c=='\t') continue;
+			if(c==' ' || c=='\n' || c=='\r' || c=='\t') continue;
 			if(c=='"'){
 				buffer='"';
 				state=4;
 				continue;
 			}
-        var nc=(i<scode.length-1)?scode.charAt(i+1):'@';
+			var nc=(i<scode.length-1)?scode.charAt(i+1):'@';
 			if(c=='/'&&c=='/'){
 				i++;
 				state=3;
@@ -41,7 +41,6 @@ function scanner(){
 				}else{
 					tokens.push(c); // - , + , * , =
 				}
-				continue;
 			}else if(c=='>' || c=='<' || c=='/'){
 				if(nc=='='){
 					tokens.push(c+'='); // >= , <= , /=
@@ -52,20 +51,19 @@ function scanner(){
 				continue;
 			}else{
             	switch(c){
-                	case '{': tokens.push(c); break; // {
-                	case '}': tokens.push(c); break; // }
-                	case '(': tokens.push(c); break; // (
-						case ')': tokens.push(c); break; // )
-						case '.': tokens.push(c); break; // .
-						case ',': tokens.push(c); break; // ,
+                	case '{': tokens.push(c); continue; // {
+                	case '}': tokens.push(c); continue; // }
+                	case '(': tokens.push(c); continue; // (
+					case ')': tokens.push(c); continue; // )
+					case '.': tokens.push(c); continue; // .
+					case ',': tokens.push(c); continue; // ,
                 	default:
-                	    if(isNaN(c)){
-                	        state=1; buffer=c; // 연산자도 아니고 숫자도 아닌것이 시작됐다. 식별자(변수명, 함수명, 예약어 등 단어)의 시작
-                    }else{
-                        	state=2; buffer=c; // 숫자 추리기 시작
-                    }
-							break;
-        		 }
+				}
+                if(isNaN(c)){
+                	    state=1; buffer=c; // 연산자도 아니고 숫자도 아닌것이 시작됐다. 식별자(변수명, 함수명, 예약어 등 단어)의 시작
+                }else{
+                        state=2; buffer=c; // 숫자 추리기 시작
+                }
 			}
 		}else if(state==1){
 		    if(isOp(c)){
@@ -168,15 +166,13 @@ function term(){
 	var r;
 	r=factor();
 	while(tok()=='*' || tok()=='/'){
-		if(tok=='*'){
+		if(tok()=='*'){
 			consumeToken();
 			r*=factor();
-		}
-		else if(tok=='/'){
+		}else if(tok()=='/'){
 			consumeToken();
 			r/=factor();
-		}
-		else{
+		}else{
 			error_code1();
 		}
 	}
@@ -184,8 +180,7 @@ function term(){
 }
 function factor(){ // factor -> NUMBER | '(' expr ')'
 	var r;
-	
-	if(isNaN(tok()){ // '(' expr ')'
+	if(isNaN(tok())==true){ // '(' expr ')'
 		if(tok()=='('){
 			consumeToken();
 			r=expr();
@@ -193,10 +188,10 @@ function factor(){ // factor -> NUMBER | '(' expr ')'
 				consumeToken();
 				return r;
 			}else{
-				//닫는괄호가 없다는 오류 출력
+				error_code1();
 			}
-		}else{
-			// 괄호가 아닌 것이 나왔다는 에러를 출력
+		}else if(isNaN(tok())==true){
+			error_code1();
 		}
 	}else{ // NUMBER
 		r=tok();

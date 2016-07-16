@@ -8,7 +8,9 @@ function isOp(c){
 	}
 	else return false;
 }
-
+function HELP(){
+	alert("식의 끝쪽에 =을 매달으시오.");
+}
 function scanner(){
 	var i=0;
 	tokens=new Array();
@@ -115,11 +117,13 @@ function onClickRun(){
      
      scanner();	
 	
-     dump_token();
+     //dump_token();
      
      sick=mathparser();
      
-     addMessage(sick);
+     alert(sick);
+	 
+	 top.document.location.reload();  
 }
 
 function error_code1(){

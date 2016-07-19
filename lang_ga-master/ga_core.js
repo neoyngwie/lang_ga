@@ -121,9 +121,9 @@ function onClickRun(){
      
      sick=mathparser();
      
-     alert(sick);
-	 
-	 top.document.location.reload();  
+     addMessage(sick);
+
+     curTokNo=0;
 }
 
 function error_code1(){
